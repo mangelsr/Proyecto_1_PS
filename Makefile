@@ -8,7 +8,9 @@ libreria: objects
 	gcc -Wall -shared -fPIC obj/Lista*.o -o lib/libcifrado.so
 
 objects:
-	gcc -Wall -Iinclude/ -c src/Lista*.c
+	gcc -Wall -c -Iinclude/ src/*.c
+	mv -f *.o obj/
+
 
 .PHONY: clean
 clean:
