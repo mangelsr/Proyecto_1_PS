@@ -5,7 +5,7 @@ pruebaLista: src/pruebaLista.c
 	gcc -Wall -c src/pruebaLista.c -o obj/prueba.o
 
 libreria: objects
-
+#	gcc -Wall Iinclude/ src/lista*.o -o lib/ 
 
 objects:
 	gcc -Wall -c src/Lista*.c -o obj/Lista*.o
