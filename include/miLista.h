@@ -37,10 +37,8 @@ typedef struct ListaEnlazadaTDA{
 
 /*Definici�n de funciones sobre la lista*/
 extern int Lista_Inicializar(ListaEnlazada *lista);
-
 extern int Lista_Vacia(ListaEnlazada *lista);
 extern int Lista_Conteo(ListaEnlazada *lista);
-
 extern ElementoLista *Lista_Buscar(ListaEnlazada *lista, void *objeto);
 
 /*Funciones de modificacion de la lista*/
