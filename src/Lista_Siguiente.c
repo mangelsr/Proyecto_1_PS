@@ -3,5 +3,8 @@
 ElementoLista *Lista_Siguiente(ListaEnlazada *lista, ElementoLista *elemento);
 
 ElementoLista *Lista_Siguiente(ListaEnlazada *lista, ElementoLista *elemento){
-  return NULL;
+  if ((lista!=NULL)&&(elemento!=NULL))
+    return elemento->siguiente;
+  else
+    return NULL;
 }

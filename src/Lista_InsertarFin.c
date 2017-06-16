@@ -8,7 +8,7 @@ int Lista_InsertarFin(ListaEnlazada *lista, void *objeto){
   	ElementoLista *ultimo = Lista_Ultimo(lista);
   	nuevo->objeto = objeto;
   	nuevo->siguiente = &(lista->ancla);
-  	lista->(ancla->anterior) = &nuevo;
+  	lista->ancla.anterior = nuevo;
   	ultimo->siguiente = nuevo;
   	nuevo->anterior = ultimo;
   	return 1;
