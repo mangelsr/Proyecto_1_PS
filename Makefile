@@ -2,7 +2,7 @@ prueba: pruebaLista libreria
 	gcc -Wall -Llib/ -Iinclude/ obj/prueba.o -lmilista -o bin/prueba
 
 pruebaLista: src/pruebaLista.c
-	gcc -Wall -Iinclude/ -c src/pruebaLista.c -o obj/prueba.o
+	gcc -Wall -Iinclude/ -c -g src/pruebaLista.c -o obj/prueba.o
 
 libreria: objects
 	gcc -Wall -shared -fPIC obj/Lista*.o -o lib/libmilista.so
@@ -10,7 +10,7 @@ libreria: objects
 	#export LD_LIBRARY_PATH
 
 objects:
-	gcc -Wall -fPIC -c -Iinclude/ src/Lista*.c
+	gcc -Wall -fPIC -c -g -Iinclude/ src/Lista*.c
 	mv -f *.o obj/
 
 .PHONY: clean
