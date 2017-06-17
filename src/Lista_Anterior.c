@@ -3,19 +3,15 @@
 ElementoLista *Lista_Anterior(ListaEnlazada *lista, ElementoLista *elemento);
 
 ElementoLista *Lista_Anterior(ListaEnlazada *lista, ElementoLista *elemento){
-  /*if ((lista!=NULL)&&(elemento!=NULL)){
-    ElementoLista pivote = lista->ancla.siguiente;
-    while(pivote != lista->ancla){
-      if (pivote == elemento)
+  if ((lista!=NULL)&&(elemento!=NULL)){
+    ElementoLista *primero = Lista_Primero(lista);
+    ElementoLista *ultimo = Lista_Ultimo(lista);
+    while (primero != ultimo){
+      if (primero == elemento)
         return elemento->anterior;
-      pivote = pivote->siguiente;
-    return NULL;
+      primero = primero->siguiente;
     }
-  }
-  else
-    return NULL;*/
-  if ((lista!=NULL)&&(elemento!=NULL))
-    return elemento->anterior;
-  else
+    return NULL;
+  }else
     return NULL;
 }
