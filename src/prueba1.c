@@ -105,8 +105,6 @@ int BarajarLista(ListaEnlazada *lista, int numeroElementos)
     free(elem);
     Lista_InsertarFin(&lista_tmp, objeto);
   }
-  int n = lista->numeroElementos;
-  printf("numero Elementos %i\n", n);
 
   /*Aqui lista debe estar vacia...*/
   if (!Lista_Vacia(lista)){
@@ -122,8 +120,6 @@ int BarajarLista(ListaEnlazada *lista, int numeroElementos)
 
   Lista_SacarTodos(&lista_tmp);
 
-  int n2 = lista_tmp.numeroElementos;
-  printf("numero Elementos %i\n", n2);
   /**/
   if (!Lista_Vacia(&lista_tmp)){
     /*No encontramos el valor (o Buscar esta mal implementada)*/
@@ -133,6 +129,32 @@ int BarajarLista(ListaEnlazada *lista, int numeroElementos)
 
   printf("BarajarLista: lista barajada exitosamente\n");
   return 0;
+}
+
+/**/
+void BuscarTodosEnLista(ListaEnlazada *lista, int numeroItems){
+
+  long conteo = (long)numeroItems;
+  long i = 0;
+
+  printf("BuscarTodosEnLista: buscando todos los elementos en la lista...\n");
+  for (i = 0; i < conteo; i++)
+  {
+    ElementoLista *elem = NULL;
+    elem = Lista_Buscar(lista, (void *)i);
+#ifdef IMPRIMIR_LISTA
+    printf("BuscarTodosEnLista: Se encontro el elemento %lu\n", (long)elem->objeto);
+#endif
+
+    if (elem == NULL){
+      fprintf(stderr, "BuscarTodosEnLista. No se encontro el elemento %lu en la lista (linea %d)\n", i, __LINE__);
+      exit(-1);
+    }
+  }
+
+  fprintf(stderr, "BuscarTodosEnLista: prueba finalizo exitosamente.\n");
+
+  return;
 }
 
 
@@ -197,8 +219,9 @@ Lista_InsertarFin(&lista, (void*)8);
   /*Barajar los elementos dentro de la lista*/
   BarajarLista(&lista, numeroElementos);
   ImprimirLista(&lista,3);//BORRAR
+
   /*Buscar todos en lista*/
-//  BuscarTodosEnLista(&lista, numeroElementos);
+  BuscarTodosEnLista(&lista, numeroElementos);
 
   /*Copiar lista prueba*/
 //  CopiarListaHaciaAdelante(&lista, &lista2);
