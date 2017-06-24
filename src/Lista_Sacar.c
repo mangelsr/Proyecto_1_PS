@@ -11,10 +11,13 @@ void Lista_Sacar(ListaEnlazada *lista, ElementoLista *elemento)
     ElementoLista *primero = Lista_Primero(lista);
     if(numeroElementos==1)
     {
+      if ( (long)primero->objeto == (long)elemento->objeto )
+      {  
          ancla->siguiente = ancla;
          ancla->anterior = ancla;
 
          lista->numeroElementos = 0;
+      }
     }
     if(numeroElementos>1)
     {

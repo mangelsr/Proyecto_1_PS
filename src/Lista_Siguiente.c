@@ -4,7 +4,7 @@ ElementoLista *Lista_Siguiente(ListaEnlazada *lista, ElementoLista *elemento);
 
 ElementoLista *Lista_Siguiente(ListaEnlazada *lista, ElementoLista *elemento)
 {
-  if ((lista!=NULL)&&(elemento!=NULL))
+  if ( (lista!=NULL) && (elemento!=NULL) && (lista->numeroElementos!=0) )
   {
     ElementoLista *ultimo = (ElementoLista*)malloc(sizeof(ElementoLista));
     ultimo = Lista_Ultimo(lista);

@@ -4,7 +4,7 @@ ElementoLista *Lista_Anterior(ListaEnlazada *lista, ElementoLista *elemento);
 
 ElementoLista *Lista_Anterior(ListaEnlazada *lista, ElementoLista *elemento)
 {
-  if ((lista!=NULL)&&(elemento!=NULL))
+  if ( (lista!=NULL) && (elemento!=NULL) && (lista->numeroElementos!=0) )
   {
     ElementoLista *primero = (ElementoLista*)malloc(sizeof(ElementoLista));
     primero = Lista_Primero(lista);
@@ -18,5 +18,5 @@ ElementoLista *Lista_Anterior(ListaEnlazada *lista, ElementoLista *elemento)
       ultimo = ultimo->anterior;
     }
   }
-    return NULL;
+  return NULL;
 }

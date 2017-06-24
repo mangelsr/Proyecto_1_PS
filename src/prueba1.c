@@ -224,6 +224,77 @@ void CopiarListaHaciaAtras(ListaEnlazada *fuente, ListaEnlazada *destino){
   return;
 }
 
+void CopiarListaPares(ListaEnlazada *lista, ListaEnlazada *listaPar){
+
+  ElementoLista *elem;
+
+  /*Copiamos toda la lista*/
+  for (elem = Lista_Primero(lista); elem != NULL; elem = Lista_Siguiente(lista, elem))
+  {
+    Lista_InsertarFin(listaPar, elem->objeto);
+  }
+  ImprimirLista(listaPar,listaPar->numeroElementos);
+
+  ElementoLista *aEliminar = NULL;
+  int eliminar = FALSE;
+  int ni=1;
+
+  /*Sacamos los eelementos impares*/
+  for (elem = Lista_Primero(listaPar); elem != NULL; elem = Lista_Siguiente(listaPar, elem))
+  {
+
+    printf("iteracion(%i): %lu\n",ni, (long)elem->objeto );
+
+    if (eliminar){
+      free(aEliminar);
+      eliminar = FALSE;
+    }
+
+    if (elem == NULL){
+      fprintf(stderr, "CopiarListaPares: Error al acceder al elemento\n");
+      exit(-1);
+    }
+
+    long valor = (long)elem->objeto;
+    
+
+    if (valor % 2 != 0)
+    {
+      printf("impar!!\n");
+      Lista_Sacar(listaPar, elem);
+      //Copiamos el puntero para eliminarlo en la siguiente corrida (despues que hayamos encontrado el siguiente.
+      aEliminar = elem;
+      eliminar = TRUE;
+    }
+    ni++;
+  }
+  ImprimirLista(listaPar,Lista_Conteo(listaPar));
+
+  //Eliminamos el ultimo elemento.  
+  if (eliminar){
+    free(aEliminar);
+    eliminar = FALSE;
+  }
+
+
+  /*Verificar que solo tengamos pares*/
+#ifdef IMPRIMIR_LISTA
+  ImprimirLista(listaPar, Lista_Conteo(listaPar));
+#endif
+
+  for (elem = Lista_Primero(listaPar); elem != NULL; elem = Lista_Siguiente(listaPar, elem)){
+    long valor = (long)elem->objeto;
+    if (valor % 2 != 0){
+      fprintf(stderr, "CopiarListaPares: Error, se encontro un elemento impar (%lu) en la lista par (linea %d)\n", valor, __LINE__);
+      exit(-1);
+    }
+  }
+
+  printf("CopiarListaPares: Prueba finalizo exitosamente.\n");
+
+}
+
+
 void RealizarPruebas(int numeroElementos)
 {
   /*Creamos una lista*/
@@ -284,7 +355,7 @@ Lista_InsertarFin(&lista, (void*)8);
 
   /*Barajar los elementos dentro de la lista*/
   BarajarLista(&lista, numeroElementos);
-  ImprimirLista(&lista,numeroElementos);//BORRAR
+  ImprimirLista(&lista,Lista_Conteo(&lista));//BORRAR
 
   /*Buscar todos en lista*/
   BuscarTodosEnLista(&lista, numeroElementos);
@@ -292,7 +363,7 @@ Lista_InsertarFin(&lista, (void*)8);
   /*Copiar lista prueba*/
   CopiarListaHaciaAdelante(&lista, &lista2);
   CopiarListaHaciaAtras(&lista, &lista3);
-//  CopiarListaPares(&lista, &listaPares);
+  CopiarListaPares(&lista, &listaPares);
 
   /*Finalemente ordenamos la lista*/
 //  OrdenarListaAscendente(&lista);
