@@ -1,3 +1,7 @@
+prueba1: libreria
+	gcc -Wall -Iinclude/ -c -g src/prueba1.c -o obj/prueba1.o
+	gcc -Wall -Llib/ -Iinclude/ obj/prueba1.o -lmilista -o bin/prueba1
+
 prueba: pruebaLista libreria
 	gcc -Wall -Llib/ -Iinclude/ obj/prueba.o -lmilista -o bin/prueba
 

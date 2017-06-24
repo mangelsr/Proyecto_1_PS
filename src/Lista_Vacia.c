@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "miLista.h"
 
 int Lista_Vacia(ListaEnlazada *lista);
