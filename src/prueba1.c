@@ -157,6 +157,39 @@ void BuscarTodosEnLista(ListaEnlazada *lista, int numeroItems){
   return;
 }
 
+void CopiarListaHaciaAdelante(ListaEnlazada *fuente, ListaEnlazada *destino){
+
+  ElementoLista *elem;
+
+  for (elem = Lista_Primero(fuente); elem != NULL; elem = Lista_Siguiente(fuente, elem)) {
+
+    Lista_InsertarFin(destino, elem->objeto);
+  }
+
+
+  if (Lista_Conteo(fuente) != Lista_Conteo(destino)){
+    fprintf(stderr, "CopiarListaHaciaAdelante: El numero de elementos en lista fuente y destino no son iguales (linea %d).\n", __LINE__);
+    exit(-1);
+  }
+
+  /*Comparemos...*/
+  ElementoLista *elem_fuente = NULL;
+  ElementoLista *elem_destino = NULL;
+
+  for (elem_fuente = Lista_Primero(fuente), elem_destino = Lista_Primero(destino); elem_fuente != NULL;
+    elem_fuente = Lista_Siguiente(fuente, elem_fuente), elem_destino = Lista_Siguiente(destino, elem_destino)) {  //fuente, elem_destino
+
+    //printf("elemento fuente: %lu, elemento destino: %lu\n", (long)elem_fuente->objeto, (long)elem_destino->objeto);
+
+    if ((long)elem_fuente->objeto != (long)elem_destino->objeto){
+      fprintf(stderr, "CopiarListaHaciaAdelante: Objetos fuente y destino no son iguales (linea %d)\n", __LINE__);
+      exit(-1);
+    }
+  }
+
+  fprintf(stderr, "CopiarListaHaciaAdelante: prueba finalizo exitosamente.\n");
+  return;
+}
 
 void RealizarPruebas(int numeroElementos)
 {
@@ -218,13 +251,13 @@ Lista_InsertarFin(&lista, (void*)8);
 
   /*Barajar los elementos dentro de la lista*/
   BarajarLista(&lista, numeroElementos);
-  ImprimirLista(&lista,3);//BORRAR
+  ImprimirLista(&lista,numeroElementos);//BORRAR
 
   /*Buscar todos en lista*/
   BuscarTodosEnLista(&lista, numeroElementos);
 
   /*Copiar lista prueba*/
-//  CopiarListaHaciaAdelante(&lista, &lista2);
+  CopiarListaHaciaAdelante(&lista, &lista2);
 //  CopiarListaHaciaAtras(&lista, &lista3);
 //  CopiarListaPares(&lista, &listaPares);
 
