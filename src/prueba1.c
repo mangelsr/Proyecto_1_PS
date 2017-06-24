@@ -66,7 +66,6 @@ int BarajarLista(ListaEnlazada *lista, int numeroElementos)
 
   for (i = 0; i < numeroElementos; i++)
   {
-    printf("%i\n",i);
     int j = 0;
     long indiceAleatorio = 0;
 
@@ -76,13 +75,11 @@ int BarajarLista(ListaEnlazada *lista, int numeroElementos)
     indiceAleatorio = IndiceAleatorio(elementos_en_lista);
 
     elem = Lista_Primero(lista);
-    printf("%lu\n", (long)elem->objeto);
-    printf("assert\n");
+
     assert(elem != NULL);
 
     /*Buscamos un elemento a sacar de la lista*/
-    for (elem = Lista_Primero(lista); elem != NULL; elem = Lista_Siguiente(lista, elem)) 
-    {
+    for (elem = Lista_Primero(lista); elem != NULL; elem = Lista_Siguiente(lista, elem)) {
 
       if (j == indiceAleatorio) {
 #ifdef IMPRIMIR_LISTA
@@ -103,12 +100,13 @@ int BarajarLista(ListaEnlazada *lista, int numeroElementos)
     //Sacamos el elemeno de la lista
     void *objeto = NULL;
     objeto = elem->objeto;
-    printf("objeto = elem->objeto;");
 
     Lista_Sacar(lista, elem);
     free(elem);
     Lista_InsertarFin(&lista_tmp, objeto);
   }
+  int n = lista->numeroElementos;
+  printf("numero Elementos %i\n", n);
 
   /*Aqui lista debe estar vacia...*/
   if (!Lista_Vacia(lista)){
@@ -124,6 +122,8 @@ int BarajarLista(ListaEnlazada *lista, int numeroElementos)
 
   Lista_SacarTodos(&lista_tmp);
 
+  int n2 = lista_tmp.numeroElementos;
+  printf("numero Elementos %i\n", n2);
   /**/
   if (!Lista_Vacia(&lista_tmp)){
     /*No encontramos el valor (o Buscar esta mal implementada)*/
@@ -173,27 +173,30 @@ Lista_InsertarFin(&lista, (void*)8);
 
 
 //««/////////////////////////////////////////////////////////////////////////////////
-  ImprimirLista(&lista,numeroElementos);//BORRAR
-  printf("vacio?: %i\n",Lista_Vacia(&lista)==0);
+  //ImprimirLista(&lista,numeroElementos);//BORRAR
+  //printf("vacio?: %i\n",Lista_Vacia(&lista)==0);
 //  printf("23<24: %i\n",23<24);
-//  ElementoLista* eSacar = (ElementoLista*)malloc(sizeof(ElementoLista));
+  //ElementoLista* eSacar = (ElementoLista*)malloc(sizeof(ElementoLista));
   
   //long* ls = (long *)malloc(sizeof(long));
-//  long ls = 0;
+  //long ls = 2;
+  //printf("borrar %lu\n",ls);
   
-//  eSacar->objeto = (void *)ls;
-  //Lista_Sacar(&lista,eSacar);
+  
+  //eSacar->objeto = (void *)ls;
+//  Lista_Sacar(&lista,eSacar);
+//  printf("borrado\n");
 //  Lista_SacarTodos(&lista);
 //  printf("todos fuera\n");
   
-//  ImprimirLista(&lista,0);//BORRAR
+//  ImprimirLista(&lista,2);//BORRAR
 //  printf("vacio?: %i\n",Lista_Vacia(&lista)==0);
 ///////////////////////////////////////////////////////////////////////////////////»»
 
 
   /*Barajar los elementos dentro de la lista*/
   BarajarLista(&lista, numeroElementos);
-
+  ImprimirLista(&lista,3);//BORRAR
   /*Buscar todos en lista*/
 //  BuscarTodosEnLista(&lista, numeroElementos);
 

@@ -2,27 +2,44 @@
 
 void Lista_SacarTodos(ListaEnlazada *lista);
 
-void Lista_SacarTodos(ListaEnlazada *lista){
-  if (lista!=NULL)
+void Lista_SacarTodos(ListaEnlazada *lista)
+{
+  if ( (lista!=NULL) && (lista->numeroElementos!=0) )
   {
-    ElementoLista *primero = Lista_Primero(lista);
-    ElementoLista *ancla = &(lista->ancla);
-    ElementoLista *eAnterior = (ElementoLista *)malloc(sizeof(ElementoLista));
 
-    //Si la lista esta vacía, entonces primero es igual a ultimo
-    while (primero != ancla)
+    int n = lista->numeroElementos;
+    ElementoLista *ancla = &(lista->ancla);
+    ElementoLista *primero = Lista_Primero(lista);
+
+    if(n==1)
     {
-      //obtengo el anterior al elemento que estoy iterando
+         ancla->siguiente = ancla;
+         ancla->anterior = ancla;
+    }
+
+    if(n>1)
+    {
+      ElementoLista *eAnterior = (ElementoLista *)malloc(sizeof(ElementoLista));
+      //Si la lista esta vacía, entonces primero es igual a ultimo
+      
+      while (primero != ancla)
+      {
+        //obtengo los elementos anterior y siguiente al elemento que estoy iterando
         eAnterior = primero->anterior;
-        eAnterior->siguiente = NULL;
-        eAnterior->anterior = NULL;
-        eAnterior->objeto = NULL;
-      primero = primero->siguiente;
+        if(eAnterior != ancla)  
+        {
+          //elemino las referencias del elemento a sacar
+          eAnterior->objeto = NULL;
+          eAnterior->siguiente = NULL;
+          eAnterior->anterior = NULL;  
+        }
+        primero = primero->siguiente;
+      }
+
     }
     lista->numeroElementos = 0;
-    ancla->siguiente = ancla;
-    ancla->anterior = ancla;
-
   }
+  
   return;
+
 }
