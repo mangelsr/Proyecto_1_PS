@@ -6,7 +6,8 @@ ElementoLista *Lista_Siguiente(ListaEnlazada *lista, ElementoLista *elemento)
 {
   if ((lista!=NULL)&&(elemento!=NULL))
   {
-    ElementoLista *ultimo = Lista_Ultimo(lista);
+    ElementoLista *ultimo = (ElementoLista*)malloc(sizeof(ElementoLista));
+    ultimo = Lista_Ultimo(lista);
     if(ultimo == elemento)
       return NULL;
 

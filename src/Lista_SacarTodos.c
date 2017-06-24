@@ -7,17 +7,17 @@ void Lista_SacarTodos(ListaEnlazada *lista)
   if ( (lista!=NULL) && (lista->numeroElementos!=0) )
   {
 
-    int n = lista->numeroElementos;
+    int numeroElementos = Lista_Conteo(lista);
     ElementoLista *ancla = &(lista->ancla);
     ElementoLista *primero = Lista_Primero(lista);
 
-    if(n==1)
+    if(numeroElementos==1)
     {
          ancla->siguiente = ancla;
          ancla->anterior = ancla;
     }
 
-    if(n>1)
+    if(numeroElementos>1)
     {
       ElementoLista *eAnterior = (ElementoLista *)malloc(sizeof(ElementoLista));
       //Si la lista esta vacía, entonces primero es igual a ultimo

@@ -6,17 +6,17 @@ void Lista_Sacar(ListaEnlazada *lista, ElementoLista *elemento)
 {
   if ( (lista!=NULL) && (elemento!=NULL) && (lista->numeroElementos!=0) )
   {
-    int n = lista->numeroElementos;
+    int numeroElementos = Lista_Conteo(lista);
     ElementoLista *ancla = &(lista->ancla);
     ElementoLista *primero = Lista_Primero(lista);
-    if(n==1)
+    if(numeroElementos==1)
     {
          ancla->siguiente = ancla;
          ancla->anterior = ancla;
 
          lista->numeroElementos = 0;
     }
-    if(n>1)
+    if(numeroElementos>1)
     {
       ElementoLista *eSiguiente = (ElementoLista *)malloc(sizeof(ElementoLista));
       ElementoLista *eAnterior = (ElementoLista *)malloc(sizeof(ElementoLista));

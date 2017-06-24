@@ -2,16 +2,21 @@
 
 ElementoLista *Lista_Anterior(ListaEnlazada *lista, ElementoLista *elemento);
 
-ElementoLista *Lista_Anterior(ListaEnlazada *lista, ElementoLista *elemento){
-  if ((lista!=NULL)&&(elemento!=NULL)){
-    ElementoLista *primero = Lista_Primero(lista);
+ElementoLista *Lista_Anterior(ListaEnlazada *lista, ElementoLista *elemento)
+{
+  if ((lista!=NULL)&&(elemento!=NULL))
+  {
+    ElementoLista *primero = (ElementoLista*)malloc(sizeof(ElementoLista));
+    primero = Lista_Primero(lista);
+    if(primero == elemento)
+      return NULL;
+
     ElementoLista *ultimo = Lista_Ultimo(lista);
-    while (primero != ultimo){
-      if (primero == elemento)
+    while (ultimo != primero){
+      if (ultimo == elemento)
         return elemento->anterior;
-      primero = primero->siguiente;
+      ultimo = ultimo->anterior;
     }
-    return NULL;
-  }else
+  }
     return NULL;
 }

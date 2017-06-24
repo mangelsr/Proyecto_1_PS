@@ -2,28 +2,47 @@
 
 int Lista_InsertarInicio(ListaEnlazada *lista, void *objeto);
 
-int Lista_InsertarInicio(ListaEnlazada *lista, void *objeto){
-  if (lista != NULL){
+int Lista_InsertarInicio(ListaEnlazada *lista, void *objeto)
+{
+  if (lista != NULL)
+  {
+
+	int numeroElementos = Lista_Conteo(lista);
 	ElementoLista *nuevo = (ElementoLista *)malloc(sizeof(ElementoLista));
-	ElementoLista *ultimo = Lista_Ultimo(lista);
-	ElementoLista *primero = Lista_Primero(lista); //ANCLA
-	if (nuevo==NULL)
+
+	if( nuevo == NULL )
 		return -1;
+
 	nuevo->objeto = objeto;
-	if (lista->ancla.siguiente==NULL && lista->ancla.anterior==NULL){
-		nuevo->siguiente = nuevo;
-		nuevo->anterior = nuevo;
-		lista->ancla = *nuevo;
-	}else{
-		nuevo->siguiente = primero;
-		nuevo->anterior = ultimo;
-		ultimo->siguiente = nuevo;
-		primero->anterior = nuevo;
-		lista->ancla = *nuevo;
-	}
-	lista->numeroElementos += 1;
-	return 0;
+
+
+	if (numeroElementos == 0)
+    {
+      nuevo->siguiente = &(lista->ancla);
+      nuevo->anterior = &(lista->ancla);
+      
+      lista->ancla.siguiente = nuevo;
+      lista->ancla.anterior = nuevo;
+
+    }else
+    {
+      ElementoLista *primero = Lista_Primero(lista);
+
+      //Se asignan las referencias al nuevo
+      nuevo->siguiente = primero;
+      nuevo->anterior = &(lista->ancla);
+      
+      
+      //Se cambian las referencias de: anterior de ancla y siguiente de primero 
+      lista->ancla.siguiente = nuevo;
+      primero->anterior = nuevo;
+      
+    }
+
+    lista->numeroElementos += 1;
+    return 0;
+
   }
   else
-  	return -1;
+    return -1;
 }

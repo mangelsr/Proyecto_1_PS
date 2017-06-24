@@ -191,6 +191,39 @@ void CopiarListaHaciaAdelante(ListaEnlazada *fuente, ListaEnlazada *destino){
   return;
 }
 
+void CopiarListaHaciaAtras(ListaEnlazada *fuente, ListaEnlazada *destino){
+
+  ElementoLista *elem;
+  
+  for (elem = Lista_Primero(fuente); elem != NULL; elem = Lista_Siguiente(fuente, elem)){
+    Lista_InsertarInicio(destino, elem->objeto);
+  }
+  
+  if (Lista_Conteo(fuente) != Lista_Conteo(destino)){
+    fprintf(stderr, "CopiarListaHaciaAtras: El numero de elementos en lista fuente y destino no son iguales.\n");
+    exit(-1);
+  }
+
+  /*Comparemos...*/
+  ElementoLista *elem_fuente = NULL;
+  ElementoLista *elem_destino = NULL;
+  
+  
+  for (elem_fuente = Lista_Primero(fuente), elem_destino = Lista_Ultimo(destino); elem_fuente != NULL;
+    elem_fuente = Lista_Siguiente(fuente, elem_fuente), elem_destino = Lista_Anterior(destino, elem_destino)) { //fuente, elem_destino
+  
+    if (elem_fuente->objeto != elem_destino->objeto){
+      fprintf(stderr, "CopiarListaHaciaAtras: Objetos fuente y destino no son iguales (linea %d.\n", __LINE__);
+      exit(-1);
+    }
+
+  }
+  
+
+  fprintf(stderr, "CopiarListaHaciaAtras: prueba finalizo exitosamente.\n");
+  return;
+}
+
 void RealizarPruebas(int numeroElementos)
 {
   /*Creamos una lista*/
@@ -258,7 +291,7 @@ Lista_InsertarFin(&lista, (void*)8);
 
   /*Copiar lista prueba*/
   CopiarListaHaciaAdelante(&lista, &lista2);
-//  CopiarListaHaciaAtras(&lista, &lista3);
+  CopiarListaHaciaAtras(&lista, &lista3);
 //  CopiarListaPares(&lista, &listaPares);
 
   /*Finalemente ordenamos la lista*/
