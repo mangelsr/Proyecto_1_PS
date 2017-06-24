@@ -8,7 +8,7 @@ int Lista_Inicializar(ListaEnlazada *lista){
 	{
 		//Se declara e inicializa una estructura ElementoLista
 		ElementoLista *eLista = (ElementoLista *)malloc(sizeof(ElementoLista));
-		
+
 		//Se asignan los valores o referecias a la estructura eLista
 		eLista->objeto = NULL;
 		eLista->siguiente = eLista;

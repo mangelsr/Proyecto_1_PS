@@ -5,10 +5,10 @@
 #include <assert.h>     /* assert */
 #include "miLista.h"
 
+
+
+
 //#define IMPRIMIR_LISTA
-
-
-
 void ImprimirLista(ListaEnlazada *lista, int numeroElementos){
 
 	if (Lista_Conteo(lista) != numeroElementos){
@@ -27,6 +27,7 @@ void ImprimirLista(ListaEnlazada *lista, int numeroElementos){
 
 
 
+
 /*Llena la lista*/
 void LlenarLista(ListaEnlazada *lista, int numeroElementos){
 
@@ -37,6 +38,9 @@ void LlenarLista(ListaEnlazada *lista, int numeroElementos){
 	}
 }
 
+
+
+
 /*Devuelve numero aleatorio de entre 0 y numeroElementos - 1*/
 long IndiceAleatorio(int numeroElementos)
 {
@@ -45,6 +49,8 @@ long IndiceAleatorio(int numeroElementos)
 
 	return r;
 }
+
+
 
 
 /*Baraja los elementos de la lista*/
@@ -132,6 +138,8 @@ int BarajarLista(ListaEnlazada *lista, int numeroElementos)
 }
 
 
+
+
 /**/
 void BuscarTodosEnLista(ListaEnlazada *lista, int numeroItems){
 
@@ -156,6 +164,9 @@ void BuscarTodosEnLista(ListaEnlazada *lista, int numeroItems){
 
 	return;
 }
+
+
+
 
 void CopiarListaHaciaAdelante(ListaEnlazada *fuente, ListaEnlazada *destino){
 
@@ -191,6 +202,9 @@ void CopiarListaHaciaAdelante(ListaEnlazada *fuente, ListaEnlazada *destino){
 	return;
 }
 
+
+
+
 void CopiarListaHaciaAtras(ListaEnlazada *fuente, ListaEnlazada *destino){
 
 	ElementoLista *elem;
@@ -220,6 +234,8 @@ void CopiarListaHaciaAtras(ListaEnlazada *fuente, ListaEnlazada *destino){
 	fprintf(stderr, "CopiarListaHaciaAtras: prueba finalizo exitosamente.\n");
 	return;
 }
+
+
 
 
 void CopiarListaPares(ListaEnlazada *lista, ListaEnlazada *listaPar){
@@ -367,6 +383,8 @@ void IntercambiarElementos(ListaEnlazada *lista, ElementoLista **elemento1, Elem
 }
 
 
+
+
 void OrdenarListaAscendente(ListaEnlazada *lista){
 	long numeroElementos = Lista_Conteo(lista);
 
@@ -468,7 +486,6 @@ void OrdenarListaAscendente(ListaEnlazada *lista){
 
 
 
-
 void RealizarPruebas(int numeroElementos)
 {
 	/*Creamos una lista*/
@@ -507,24 +524,25 @@ void RealizarPruebas(int numeroElementos)
 	LlenarLista(&lista, numeroElementos);
 
 	/*Barajar los elementos dentro de la lista*/
-	BarajarLista(&lista, numeroElementos);
+//	BarajarLista(&lista, numeroElementos);
 
 	/*Buscar todos en lista*/
-	BuscarTodosEnLista(&lista, numeroElementos);
+//	BuscarTodosEnLista(&lista, numeroElementos);
 
 	/*Copiar lista prueba*/
-	CopiarListaHaciaAdelante(&lista, &lista2);
-	CopiarListaHaciaAtras(&lista, &lista3);
-	CopiarListaPares(&lista, &listaPares);
+//	CopiarListaHaciaAdelante(&lista, &lista2);
+//	CopiarListaHaciaAtras(&lista, &lista3);
+//	CopiarListaPares(&lista, &listaPares);
 
 
 	/*Finalemente ordenamos la lista*/
-	OrdenarListaAscendente(&lista);
+//	OrdenarListaAscendente(&lista);
 
 
 	return;
 
 }
+
 
 
 
@@ -540,3 +558,6 @@ int main(int argc, char *argv[])
 	RealizarPruebas(elementos);
 	return 0;
 }
+
+
+

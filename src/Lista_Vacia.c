@@ -4,7 +4,11 @@ int Lista_Vacia(ListaEnlazada *lista);
 
 int Lista_Vacia(ListaEnlazada *lista){
 	if (lista != NULL)
-		return (lista->numeroElementos==0);
+	{
+		int n = lista->numeroElementos;
+		printf("%i\n",n);
+		return (n > 0);
+	}
 	else
 		return -1;
 }
