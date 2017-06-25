@@ -4,9 +4,10 @@ void Lista_SacarTodos(ListaEnlazada *lista);
 
 void Lista_SacarTodos(ListaEnlazada *lista)
 {
+  //Condiciones para entrar al algoritmo
   if ( (lista!=NULL) && (lista->numeroElementos!=0) )
   {
-
+    //Se obtiene el tamaño de la lista
     int numeroElementos = Lista_Conteo(lista);
     ElementoLista *ancla = &(lista->ancla);
     ElementoLista *primero = Lista_Primero(lista);
@@ -28,15 +29,18 @@ void Lista_SacarTodos(ListaEnlazada *lista)
         eAnterior = primero->anterior;
         if(eAnterior != ancla)  
         {
-          //elemino las referencias del elemento a sacar
+          //Se eleminan las referencias del elemento a sacar
           eAnterior->objeto = NULL;
           eAnterior->siguiente = NULL;
           eAnterior->anterior = NULL;  
+
         }
+        //Se mueve el puntero al siguiente elemento
         primero = primero->siguiente;
       }
 
     }
+    //Se actualiza el numero de Elementos
     lista->numeroElementos = 0;
   }
   
