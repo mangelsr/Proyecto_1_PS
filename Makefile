@@ -1,10 +1,8 @@
 prueba: pruebaLista libreria
 	gcc -Wall -Llib/ -Iinclude/ obj/prueba.o -lmilista -o bin/prueba
-	gcc -Wall -Llib/ -Iinclude/ obj/prueba1.o -lmilista -o bin/prueba1
 
 pruebaLista: src/pruebaLista.c
 	gcc -Wall -Iinclude/ -c -g src/pruebaLista.c -o obj/prueba.o
-	gcc -Wall -Iinclude/ -c -g src/prueba1.c -o obj/prueba1.o
 
 libreria: objects
 	gcc -Wall -shared -fPIC obj/Lista*.o -o lib/libmilista.so
