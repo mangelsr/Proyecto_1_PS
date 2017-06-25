@@ -294,6 +294,188 @@ void CopiarListaPares(ListaEnlazada *lista, ListaEnlazada *listaPar){
 
 }
 
+void IntercambiarElementos(ListaEnlazada *lista, ElementoLista **elemento1, ElementoLista **elemento2){
+
+  ElementoLista *anteriorElem1 = Lista_Anterior(lista, *elemento1);
+  ElementoLista *anteriorElem2 = Lista_Anterior(lista, *elemento2);
+  ElementoLista *siguienteElem2 = Lista_Siguiente(lista, *elemento2);
+
+
+  long valor_anterior_elem2 = (long)(anteriorElem2)->objeto;
+  //long valor_siguiente_elem2 = (long)(siguienteElem2)->objeto;
+
+  //printf(" elem1 %lu\n", (long)(*elemento1)->objeto);
+  //printf(" elem2 %lu\n", (long)(*elemento2)->objeto); 
+
+  long valor_elem1 = (long)(*elemento1)->objeto;
+  long valor_elem2 = (long)(*elemento2)->objeto;
+
+  //Sacamos (y se libera memoria)
+  Lista_Sacar(lista, *elemento1);
+  Lista_Sacar(lista, *elemento2);
+
+  free(*elemento1);
+  free(*elemento2);
+
+  //printf("antes del swap\n");
+  //ImprimirLista(lista, Lista_Conteo(lista));
+
+  /*elemento 2*/
+  if (anteriorElem1 == NULL){
+    /*elem1 es el primer elemento de la lista*/
+    Lista_InsertarInicio(lista, (void *)valor_elem2);
+    *elemento2 = Lista_Primero(lista);
+    //ImprimirLista(lista, Lista_Conteo(lista));
+  }
+  else{
+
+
+    Lista_InsertarDespues(lista, (void *)valor_elem2, anteriorElem1);
+    *elemento2 = Lista_Siguiente(lista, anteriorElem1);
+    //ImprimirLista(lista, Lista_Conteo(lista));
+
+  }
+  /*elemento 1*/
+  if (anteriorElem2 == NULL){
+    /*elem2 es el primer elemento de la lista*/
+    Lista_InsertarInicio(lista, (void *)valor_elem1);
+    *elemento1 = Lista_Primero(lista);
+    //ImprimirLista(lista, Lista_Conteo(lista));
+  }
+  else{
+    /*El elemento2 siempre es cambiado correctamente
+    *Sin embargo, puede darse el caso que el elemento1
+    *tenga como elemento anterior al elemento2 (si no es cabeza de la lista),
+    *pero a este punto elemento1 ya cambio de posicion, y no tendra como padre/hijo
+    *al elemento2*/
+    if (valor_anterior_elem2 == valor_elem1){
+
+      if (siguienteElem2 == NULL){  /*elemento2 era ultimo de la lista*/
+        Lista_InsertarFin(lista, (void *)valor_elem1);
+        *elemento1 = Lista_Ultimo(lista);
+      }
+      else{
+        Lista_InsertarAntes(lista, (void *)valor_elem1, siguienteElem2);
+        *elemento1 = Lista_Anterior(lista, anteriorElem2);
+      }
+
+      //ImprimirLista(lista, Lista_Conteo(lista));
+    }
+    else{
+
+      Lista_InsertarDespues(lista, (void *)valor_elem1, anteriorElem2);
+      *elemento1 = Lista_Siguiente(lista, anteriorElem2);
+
+    }
+  }
+  //printf("despues del swap\n");
+  //ImprimirLista(lista, Lista_Conteo(lista));
+
+  return;
+}
+
+
+void OrdenarListaAscendente(ListaEnlazada *lista)
+{
+  long numeroElementos = Lista_Conteo(lista);
+
+  int i = 0;
+
+#ifdef IMPRIMIR_LISTA
+  printf("Lista antes de ordenar:\n");
+  ImprimirLista(lista, Lista_Conteo(lista));
+#endif
+
+  ElementoLista *actual, *siguiente, *minimoActual, *elem;
+  for (i = 0; i < numeroElementos; i++){
+
+    //printf(" i %d\n", i);
+
+    //Sacar el siguiente elemento a comparar
+    if (i == 0){
+      actual = Lista_Primero(lista);
+      minimoActual = actual;
+    }
+    else{
+      int j = 0;
+      for (j = 0; j < i; j++){
+
+        //printf("j = %d\n",j);
+        if (j == 0){
+          siguiente = Lista_Primero(lista);
+          siguiente = Lista_Siguiente(lista, siguiente);
+        }
+        else{
+          siguiente = Lista_Siguiente(lista, siguiente);
+        }
+      }
+      actual = siguiente;
+      minimoActual = actual;
+      //printf("Siguiente %lu\n", (long)siguiente->objeto); 
+    }
+
+    //siguiente = Lista_Siguiente(lista, actual);
+    //printf("Siguiente %lu\n", (long)siguiente->objeto);
+
+    int minimo_cambio = FALSE;
+    for (elem = actual; elem != NULL; elem = Lista_Siguiente(lista, elem)){
+
+      long valor_elem = (long)elem->objeto;
+      long valor_min = (long)minimoActual->objeto;
+
+      if (valor_elem < valor_min){
+        minimoActual = elem;
+        //printf("Min: %lu, elem: %lu, actual %lu\n", valor_min, valor_elem, (long)actual->objeto);
+        minimo_cambio = TRUE;
+      }
+      else{
+        //printf("Min: %lu, elem: %lu, actual %lu\n", valor_min, valor_elem, (long)actual->objeto);
+      }
+    }
+
+    //Aqui encontramos el minimo, 
+    //printf("Minimo Actual %lu\n", (long)minimoActual->objeto);
+    //printf("Actual %lu\n", (long)actual->objeto);
+
+    //Si valor_elem == valor_min Quiere decir que el minimo lo encontramos de inmediato
+    if (minimo_cambio){
+
+      //TODO: Intercambiamos el minimo y el actual
+      IntercambiarElementos(lista, &actual, &minimoActual);
+
+      //ImprimirLista(lista, numeroElementos);
+
+
+    }
+    else{
+      //ImprimirLista(lista, numeroElementos);
+    }
+
+
+    //Aqui actual y minimoActual son punteros liberados (IntercambiarElementos los libero)
+
+  }
+#ifdef IMPRIMIR_LISTA
+  printf("OrdenarLista: despues de ordenar:\n");
+  ImprimirLista(lista, Lista_Conteo(lista));
+#endif
+
+  for(  elem = Lista_Primero(lista); elem != NULL; elem = Lista_Siguiente(lista, elem)  )
+  {
+    
+    if (siguiente != NULL)
+    {
+      if (siguiente->objeto < elem->objeto)
+      {
+        printf("OrdenarLista: los elementos %lu y %lu no estan en orden ascendente\n", (long)siguiente->objeto, (long)elem->objeto);
+      }
+    }
+    siguiente = Lista_Siguiente(lista, elem);
+
+  }
+
+  printf("OrdenarLista: Prueba de ordernar lista exitosa\n");
+}
 
 void RealizarPruebas(int numeroElementos)
 {
@@ -366,7 +548,9 @@ Lista_InsertarFin(&lista, (void*)8);
   CopiarListaPares(&lista, &listaPares);
 
   /*Finalemente ordenamos la lista*/
-//  OrdenarListaAscendente(&lista);
+  ImprimirLista(&lista,Lista_Conteo(&lista));
+  OrdenarListaAscendente(&lista);
+  ImprimirLista(&lista,Lista_Conteo(&lista));
 
   return;
 }

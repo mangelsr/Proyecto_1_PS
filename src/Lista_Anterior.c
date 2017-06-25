@@ -6,17 +6,17 @@ ElementoLista *Lista_Anterior(ListaEnlazada *lista, ElementoLista *elemento)
 {
   if ( (lista!=NULL) && (elemento!=NULL) && (lista->numeroElementos!=0) )
   {
-    ElementoLista *primero = (ElementoLista*)malloc(sizeof(ElementoLista));
-    primero = Lista_Primero(lista);
-    if(primero == elemento)
+    /*
+    int numeroElementos = lista->numeroElementos;
+    if((long)elemento->objeto > (long) numeroElementos)
+      return NULL;
+    */
+    ElementoLista *eItr = (ElementoLista*)malloc(sizeof(ElementoLista));
+    eItr = Lista_Primero(lista);
+    if(eItr == elemento)
       return NULL;
 
-    ElementoLista *ultimo = Lista_Ultimo(lista);
-    while (ultimo != primero){
-      if (ultimo == elemento)
-        return elemento->anterior;
-      ultimo = ultimo->anterior;
-    }
+    return elemento->anterior;
   }
   return NULL;
 }

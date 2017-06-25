@@ -4,21 +4,30 @@ int Lista_InsertarAntes(ListaEnlazada *lista, void *objeto, ElementoLista *eleme
 
 int Lista_InsertarAntes(ListaEnlazada *lista, void *objeto, ElementoLista *elemento)
 {
-	/*
-  if ((lista!=NULL)&&(elemento!=NULL))
+  if (  (lista!=NULL) && (elemento!=NULL) && (objeto!=NULL) && (lista->numeroElementos!=0) )
   {
-    ElementoLista *primero = (ElementoLista*)malloc(sizeof(ElementoLista));
-    ultimo = Lista_Primero(lista);
-    if(ultimo == elemento)
-      Lista_InsertarInicio(lista,elemento->objeto);
+    if((long)objeto==(long)elemento->objeto)
+      return 0;
 
-    ElementoLista *ultimo = Lista_Ultimo(lista);
-    while (ultimo != primero){
-      if (ultimo == elemento)
-        return elemento->anterior;
-      ultimo = ultimo->anterior;
-    }
+    ElementoLista *eItr = (ElementoLista*)malloc(sizeof(ElementoLista));
+    ElementoLista *nuevo = (ElementoLista*)malloc(sizeof(ElementoLista));
+
+    eItr = elemento;
+    ElementoLista *oldAnterior = (ElementoLista *)malloc(sizeof(ElementoLista));
+
+    nuevo->objeto = objeto;
+
+    oldAnterior = eItr->anterior;
+
+    eItr->anterior = nuevo;
+    nuevo->siguiente = eItr;
+
+    oldAnterior->siguiente = nuevo;
+    nuevo->anterior = oldAnterior;
+
+    lista->numeroElementos += 1;
+    
+    return 0;
   }
-  */
-  return 0;
+  return -1;
 }
