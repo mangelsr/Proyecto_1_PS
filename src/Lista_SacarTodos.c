@@ -1,4 +1,5 @@
 #include "miLista.h"
+#include <stdlib.h>
 
 void Lista_SacarTodos(ListaEnlazada *lista);
 

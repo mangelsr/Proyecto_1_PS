@@ -524,19 +524,19 @@ void RealizarPruebas(int numeroElementos)
 	LlenarLista(&lista, numeroElementos);
 
 	/*Barajar los elementos dentro de la lista*/
-	BarajarLista(&lista, numeroElementos);
+//	BarajarLista(&lista, numeroElementos);
 
 	/*Buscar todos en lista*/
-	BuscarTodosEnLista(&lista, numeroElementos);
+//	BuscarTodosEnLista(&lista, numeroElementos);
 
 	/*Copiar lista prueba*/
-	CopiarListaHaciaAdelante(&lista, &lista2);
-	CopiarListaHaciaAtras(&lista, &lista3);
-	CopiarListaPares(&lista, &listaPares);
+//	CopiarListaHaciaAdelante(&lista, &lista2);
+//	CopiarListaHaciaAtras(&lista, &lista3);
+//	CopiarListaPares(&lista, &listaPares);
 
 
 	/*Finalemente ordenamos la lista*/
-	OrdenarListaAscendente(&lista);
+//	OrdenarListaAscendente(&lista);
 
 
 	return;

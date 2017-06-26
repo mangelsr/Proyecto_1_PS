@@ -1,52 +1,52 @@
 #include "miLista.h"
+#include <stdlib.h>
 
 int Lista_InsertarFin(ListaEnlazada *lista, void *objeto);
 
 int Lista_InsertarFin(ListaEnlazada *lista, void *objeto)
 {
-  //Se comprueba que el puntero de la lista sea valido
-  if (lista != NULL)
+  //Condiciones para entrar al algoritmo
+  if (lista != NULL) 
   {
-    //Se obtiene el numero de elementos
-    int numeroElementos = Lista_Conteo(lista);
-    ElementoLista *nuevo = (ElementoLista *)malloc(sizeof(ElementoLista));
-    
-    //Se comprueba que el puntero del nuevo elemetoLista sea valido
-    if (nuevo==NULL)
+    //Puntero ElementoLista donde se guardará el nuevo objeto
+    ElementoLista *nuevoFin = (ElementoLista *)malloc(sizeof(ElementoLista));
+
+    if(nuevoFin==NULL)
       return -1;
 
-    //Se asigna el objeto al objeto del nuevo elemento
-    nuevo->objeto = objeto;
+    //Se le asigna el objeto
+    nuevoFin->objeto = objeto;
+    //Se obtiene el tamaño de la lista
+    int numero = lista->numeroElementos;
 
-    //Se comprueba si la lista esta vacia
-    if (numeroElementos == 0)
+    if (numero == 0)
     {
-      //Se asignan referencias al nuevo
-      nuevo->siguiente = &(lista->ancla);
-      nuevo->anterior = &(lista->ancla);
-      
-      //Se cambian las referencias del ancla
-      lista->ancla.siguiente = nuevo;
-      lista->ancla.anterior = nuevo;
-
-    }else
-    {
-      ElementoLista *ultimo = Lista_Ultimo(lista);
-
-      //Se asignan las referencias al nuevo
-      nuevo->siguiente = &(lista->ancla);
-      nuevo->anterior = ultimo;
-      
-      //Se cambian las referencias de: anterior de ancla y siguiente de ultimo 
-      ultimo->siguiente = nuevo;
-      lista->ancla.anterior = nuevo;
+      //Se mueven los punteros del nuevoFin
+      nuevoFin->siguiente = &(lista->ancla); 
+      nuevoFin->anterior = &(lista->ancla);
+      //Se mueven los punteros del ancla
+      lista->ancla.siguiente = nuevoFin;
+      lista->ancla.anterior = nuevoFin;
     }
+    if (numero >= 1)
+    {
+      //Se obtiene el último elemento
+      ElementoLista *oldUltimo = Lista_Ultimo(lista);
 
-    //Se incrementan el nuemro de elementos de la lista
+      //Se mueven los punteros del old Ultimo
+      oldUltimo->siguiente = nuevoFin;
+      nuevoFin->anterior = oldUltimo;
+      //Se mueven los punteros del nuevoFin
+      nuevoFin->siguiente = &(lista->ancla);
+      //Se mueven los punteros del ancla
+      lista->ancla.anterior = nuevoFin;
+    }
+    //
+    //lista->ancla.anterior = nuevoFin;
+
+    //Actualiza número de elementos
     lista->numeroElementos += 1;
-    return 0;
-
+    return 1;
   }
-  else
-    return -1;
+return -1; 
 }

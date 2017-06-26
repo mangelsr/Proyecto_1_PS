@@ -1,4 +1,5 @@
 #include "miLista.h"
+#include <stdlib.h>
 
 int Lista_InsertarInicio(ListaEnlazada *lista, void *objeto);
 

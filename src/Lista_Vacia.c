@@ -1,9 +1,10 @@
-#include <stdio.h>
 #include "miLista.h"
+#include <stdlib.h>
 
 int Lista_Vacia(ListaEnlazada *lista);
 
-int Lista_Vacia(ListaEnlazada *lista){
+int Lista_Vacia(ListaEnlazada *lista)
+{
 	//Comprueba que el puntero de lista sea valido
 	if (lista != NULL)
 	{

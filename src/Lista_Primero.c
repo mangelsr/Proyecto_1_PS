@@ -1,4 +1,5 @@
 #include "miLista.h"
+#include <stdlib.h>
 
 ElementoLista *Lista_Primero(ListaEnlazada *lista);
 
@@ -14,6 +15,7 @@ ElementoLista *Lista_Primero(ListaEnlazada *lista){
       //Retorno el puntero de siguiente del ancla de la lista 
       return lista->ancla.siguiente;
     }
+    return &(lista->ancla);
   }
   return NULL;
 }

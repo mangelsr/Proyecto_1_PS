@@ -1,4 +1,5 @@
 #include "miLista.h"
+#include <stdlib.h>
 
 ElementoLista *Lista_Ultimo(ListaEnlazada *lista);
 
@@ -12,6 +13,7 @@ ElementoLista *Lista_Ultimo(ListaEnlazada *lista){
     //Si hay más de un elemento, entonces el ANTERIOR AL ANCLA es el ultimo de la lista
       return lista->ancla.anterior;
     }
+    return &(lista->ancla);
   }
   return NULL;
 }

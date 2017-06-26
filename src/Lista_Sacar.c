@@ -1,4 +1,5 @@
 #include "miLista.h"
+#include <stdlib.h>
 
 void Lista_Sacar(ListaEnlazada *lista, ElementoLista *elemento);
 
@@ -6,6 +7,7 @@ void Lista_Sacar(ListaEnlazada *lista, ElementoLista *elemento)
 {
   //Condiciones para entrar al algoritmo
   if ( (lista!=NULL) && (elemento!=NULL) && (lista->numeroElementos!=0) )
+  
   {
     //Se obtiene el tamaño de la lista
     int numeroElementos = Lista_Conteo(lista);
@@ -25,7 +27,7 @@ void Lista_Sacar(ListaEnlazada *lista, ElementoLista *elemento)
     }
     if(numeroElementos>1)
     {
-      //Solo para no tener un acceso rapido a las referencias, se crean dos punteros
+      //Solo para tener un acceso rapido a las referencias, se crean dos punteros
       //para anterior y siguiente del iterador
       ElementoLista *eSiguiente = (ElementoLista *)malloc(sizeof(ElementoLista));
       ElementoLista *eAnterior = (ElementoLista *)malloc(sizeof(ElementoLista));

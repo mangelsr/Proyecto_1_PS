@@ -1,4 +1,5 @@
 #include "miLista.h"
+#include <stdlib.h>
 
 int Lista_Inicializar(ListaEnlazada *lista);
 
